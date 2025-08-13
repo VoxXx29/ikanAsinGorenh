@@ -1,0 +1,54 @@
+Terminal Flower
+body {
+background-color: #000;
+color: #0f0;
+font-family: 'Courier New', monospace;
+margin: 0;
+padding: 20px;
+height: 100vh;
+overflow: hidden;
+}
+#terminal {
+white-space: pre-wrap;
+word-break: break-word;
+}
+.input-line {
+display: inline;
+}
+.cursor {
+display: inline-block;
+width: 10px;
+background: #0f0;
+animation: blink 1s steps(1) infinite;
+}
+@keyframes blink {
+50% { background: transparent; }
+}
+>
+const inputElem = document.getElementById('input');
+const terminal = document.getElementById('terminal');
+let command = "";
+const flower = `
+.-.
+/ \\
+| |
+\\ /
+\`-'
+.-"""-.
+/ .===. \\
+\\/ 6 6 \\/
+( \\___/ )
+___ooo__V__ooo___
+`;
+document.addEventListener('keydown', (e) => {
+if (e.key === 'Backspace') {
+command = command.slice(0, -1);
+} else if (e.key === 'Enter') {
+terminal.innerHTML += command + '\n' + flower + '> ';
+command = '';
+} else if (e.key.length === 1) {
+command += e.key;
+}
+inputElem.textContent = command;
+window.scrollTo(0, document.body.scrollHeight);
+});
